@@ -1,30 +1,53 @@
 using UnityEngine;
+using System.Collections;
 
 public class GameHandler : MonoBehaviour
 {
     [SerializeField] private CardHandler cardHandler; // Reference to CardHandler.
     [SerializeField] private UIHandler uiHandler; // Reference to UIHandler.
-    private bool gameConcluded = false;
+    private bool playerWantsToHit = false;
 
-    void Start()
+    public bool PlayerWantsToHit => playerWantsToHit;
+
+    private void Start()
     {
-        PlayBlackjack();
+        StartCoroutine(PlayBlackjack());
     }
 
-    private void PlayBlackjack()
+    private IEnumerator PlayBlackjack()
     {
         cardHandler.StartGame();
 
-        // Play player turns until player busts or stands.
-        while (!gameConcluded && uiHandler.PlayerWantsToHit())
+        // Player's turn.
+        bool gameConcluded = false;
+        while (!gameConcluded)
         {
-            cardHandler.PlayerHit(out gameConcluded);
+            // Wait for the player to make a decision.
+            yield return StartCoroutine(uiHandler.PlayerWantsToHit());
+
+            // Now we check the player’s decision after they’ve confirmed it
+            if (uiHandler.playerWantsToHit)
+            {
+                // Player chooses to "Hit."
+                cardHandler.PlayerHit(out gameConcluded);
+            }
+            else
+            {
+                // Player chooses to "Stand."
+                break;
+            }
         }
 
-        // Play dealers turn.
-        cardHandler.DealerTurn(out gameConcluded);
+        // Dealer's turn.
+        if (!gameConcluded)
+        {
+            cardHandler.DealerTurn(out gameConcluded);
+        }
 
-        // Determine winner of the game.
-        cardHandler.DetermineWinner();
+        // If neither busted, determine the winner.
+        if (!gameConcluded)
+        {
+            cardHandler.DetermineWinner();
+        }
     }
 }

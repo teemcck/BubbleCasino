@@ -5,8 +5,8 @@ public class CardHandler : MonoBehaviour
 {
     [SerializeField] private DeckObject deck; // Reference to DeckObject.
     [SerializeField] private UIHandler uiHandler; // Reference to UIHandler.
-    private List<CardObject> playerHand = new List<CardObject>();
-    private List<CardObject> dealerHand = new List<CardObject>();
+    public List<CardObject> playerHand = new List<CardObject>();
+    public List<CardObject> dealerHand = new List<CardObject>();
 
     private const int BLACKJACK = 21; // Maximum score in Blackjack.
 
@@ -39,9 +39,7 @@ public class CardHandler : MonoBehaviour
             hand.Add(card);
 
             // Rerender cards after some player has drawn.
-            uiHandler.UpdatePlayerUI();
-            uiHandler.UpdateDealerUI();
-
+            uiHandler.UpdateUI();
         }
         else
         {
@@ -89,13 +87,18 @@ public class CardHandler : MonoBehaviour
         // Example of player choosing to "Hit."
         DealCard(playerHand);
 
+        DisplayHands();
+
         // Check if the player busted.
         if (CalculateHandValue(playerHand) > BLACKJACK)
         {
             Debug.Log("Player Busted! Dealer Wins!");
             gameConcluded = true;
         }
-        gameConcluded = false;
+        else
+        {
+            gameConcluded = false;
+        }
     }
 
     public void DealerTurn(out bool gameConcluded)
@@ -104,6 +107,7 @@ public class CardHandler : MonoBehaviour
         while (CalculateHandValue(dealerHand) < CalculateHandValue(playerHand))
         {
             DealCard(dealerHand);
+            DisplayHands();
         }
 
         // Check if the dealer busted.
@@ -112,7 +116,10 @@ public class CardHandler : MonoBehaviour
             Debug.Log("Dealer Busted! Player Wins!");
             gameConcluded = true;
         }
-        gameConcluded = false;
+        else
+        {
+            gameConcluded = false;
+        }
     }
 
     public void DetermineWinner()
