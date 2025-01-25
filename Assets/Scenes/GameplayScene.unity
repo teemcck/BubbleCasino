@@ -147,8 +147,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1483579169}
   - {fileID: 1945441073}
+  - {fileID: 1483579169}
   m_Father: {fileID: 1673662456}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -185,9 +185,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c3cc2a6f8cacbb4c936580e546008d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 1673662455}
   cardHandler: {fileID: 142352047}
+  cardPrefab: {fileID: 5949665572060467739, guid: 70ccb453081f2934bbed5dec3bad8876, type: 3}
+  playerCardsParent: {fileID: 1536772256}
+  dealerCardsParent: {fileID: 465869545}
   hitAndStandButtons: {fileID: 64646030}
+  playerHitting: 0
 --- !u!4 &133033685
 Transform:
   m_ObjectHideFlags: 0
@@ -234,6 +237,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deck: {fileID: 572548148}
   uiHandler: {fileID: 133033684}
+  playerHand: []
+  dealerHand: []
 --- !u!4 &142352048
 Transform:
   m_ObjectHideFlags: 0
@@ -249,6 +254,37 @@ Transform:
   m_Children:
   - {fileID: 572548149}
   m_Father: {fileID: 1240507171}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &465869544
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 465869545}
+  m_Layer: 0
+  m_Name: DealerHand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &465869545
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465869544}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -300, y: 50, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1673662456}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &572548147
 GameObject:
@@ -707,7 +743,7 @@ GameObject:
   - component: {fileID: 1483579171}
   - component: {fileID: 1483579170}
   m_Layer: 5
-  m_Name: HitButton
+  m_Name: StandButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -827,6 +863,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1483579168}
   m_CullTransparentMesh: 1
+--- !u!1 &1536772255
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1536772256}
+  m_Layer: 0
+  m_Name: PlayerHand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1536772256
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536772255}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -300, y: -350, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1673662456}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1673662452
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,6 +989,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 64646031}
+  - {fileID: 1536772256}
+  - {fileID: 465869545}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -942,7 +1011,7 @@ GameObject:
   - component: {fileID: 1945441075}
   - component: {fileID: 1945441074}
   m_Layer: 5
-  m_Name: StandButton
+  m_Name: HitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1014,7 +1083,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 133033684}
         m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
-        m_MethodName: OnStandButtonClicked
+        m_MethodName: OnHitButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
