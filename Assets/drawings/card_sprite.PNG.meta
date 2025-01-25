@@ -109,7 +109,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -144,7 +144,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -734,7 +734,32 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      card_sprite_0: 4212065305842309025
+      card_sprite_1: 8901304533108895049
+      card_sprite_10: -6526988272658696857
+      card_sprite_11: 6705525867563314775
+      card_sprite_12: 5259709672632614557
+      card_sprite_13: -2568671660339502698
+      card_sprite_14: -5355162649805798074
+      card_sprite_15: 4356433061293199158
+      card_sprite_16: 3131512973229066158
+      card_sprite_17: 2049992397817623651
+      card_sprite_18: -5700984414657782488
+      card_sprite_19: 2124075436079768170
+      card_sprite_2: 1980204559683449837
+      card_sprite_20: 2362216632785995604
+      card_sprite_21: 1767849280790493323
+      card_sprite_22: 4152809980513471298
+      card_sprite_23: -4932915167966159833
+      card_sprite_24: -3988029103942091507
+      card_sprite_3: -2780324147056308181
+      card_sprite_4: 2239137512088275389
+      card_sprite_5: 824941260449529153
+      card_sprite_6: 2490223619058646856
+      card_sprite_7: -1387446909813281997
+      card_sprite_8: 1769666820011841008
+      card_sprite_9: -1718185292751033129
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

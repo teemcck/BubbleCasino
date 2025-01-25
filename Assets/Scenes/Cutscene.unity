@@ -282,6 +282,7 @@ MonoBehaviour:
   textLength: 0
   mainTextObject: {fileID: 1029657436}
   charName: {fileID: 454252264}
+  bobbyRed: {fileID: 1891230301}
   nextButton: {fileID: 419814643}
   eventPos: 0
   fadeScreenOut: {fileID: 1882065348}
@@ -1356,6 +1357,7 @@ GameObject:
   - component: {fileID: 1891230302}
   - component: {fileID: 1891230304}
   - component: {fileID: 1891230303}
+  - component: {fileID: 1891230305}
   m_Layer: 5
   m_Name: BobbyRed
   m_TagString: Untagged
@@ -1379,8 +1381,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 302, y: -39.719}
-  m_SizeDelta: {x: 782.7457, y: 1000.5611}
+  m_AnchoredPosition: {x: 335.8816, y: -83.02882}
+  m_SizeDelta: {x: 850.5089, y: 1087.1809}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1891230303
 MonoBehaviour:
@@ -1402,7 +1404,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 191719806997203120, guid: 87b71f19e2d0c4f58ab0c61997e7ca6d, type: 3}
+  m_Sprite: {fileID: 2141882300889700204, guid: 1f9111a5b3375499f809c311f9dba41f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1420,6 +1422,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1891230301}
   m_CullTransparentMesh: 1
+--- !u!95 &1891230305
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891230301}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1a39f2a5f6fb248dcb8ce49c5e3dd058, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
