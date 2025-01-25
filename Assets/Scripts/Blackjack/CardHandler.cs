@@ -9,6 +9,10 @@ public class CardHandler : MonoBehaviour
 
     private const int BLACKJACK = 21; // Maximum score in Blackjack.
 
+    // Accessor methods for player and deal hands.
+    public List<CardObject> GetPlayerHand() => playerHand;
+    public List<CardObject> GetDealerHand() => dealerHand;
+
     public void StartGame()
     {
         // Initialize the deck.
@@ -75,7 +79,7 @@ public class CardHandler : MonoBehaviour
         Debug.Log($"Dealer's Total: {CalculateHandValue(dealerHand)}");
     }
 
-    public void PlayerTurn()
+    public void PlayerTurn(out bool gameConcluded)
     {
         // Example of player choosing to "Hit."
         DealCard(playerHand);
@@ -84,13 +88,15 @@ public class CardHandler : MonoBehaviour
         if (CalculateHandValue(playerHand) > BLACKJACK)
         {
             Debug.Log("Player Busted! Dealer Wins!");
+            gameConcluded = true;
         }
+        gameConcluded = false;
     }
 
-    public void DealerTurn()
+    public void DealerTurn(out bool gameConcluded)
     {
-        // Dealer's turn logic: must hit until reaching 17 or higher.
-        while (CalculateHandValue(dealerHand) < 17)
+        // Dealer's turn logic: must hit until reaching playerHand or higher.
+        while (CalculateHandValue(dealerHand) < CalculateHandValue(playerHand))
         {
             DealCard(dealerHand);
         }
@@ -99,12 +105,9 @@ public class CardHandler : MonoBehaviour
         if (CalculateHandValue(dealerHand) > BLACKJACK)
         {
             Debug.Log("Dealer Busted! Player Wins!");
+            gameConcluded = true;
         }
-        else
-        {
-            // Compare scores
-            DetermineWinner();
-        }
+        gameConcluded = false;
     }
 
     private void DetermineWinner()
