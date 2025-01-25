@@ -16,7 +16,11 @@ public class Scene01Events : MonoBehaviour
     [SerializeField] GameObject charName;
 
     [SerializeField] GameObject bobbyRed;
-    private Animator bobbyAnimator;
+    public Animator bobbyAnimator;
+    public AudioSource bobbyAudioSource;
+
+    private bool isTalking = false;
+
 
 
     //Next Button
@@ -59,9 +63,17 @@ public class Scene01Events : MonoBehaviour
     {
         skipText = false;
         textRunning = true;
+        isTalking = true;
 
         // Start talking animation
         bobbyAnimator.SetTrigger("Talk");
+
+        // Start Bobby's talking animation and audio
+        bobbyAnimator.Play("BobbyTalk");
+        if (bobbyAudioSource != null && !bobbyAudioSource.isPlaying)
+        {
+            bobbyAudioSource.Play(); // Start the looping audio
+        }
 
         // Clear text and start animation
         textBox.GetComponent<TMPro.TMP_Text>().text = "";
@@ -84,6 +96,14 @@ public class Scene01Events : MonoBehaviour
 
         // Stop talking animation and switch back to idle
         bobbyAnimator.SetTrigger("Idle");
+
+        // Stop Bobby's talking animation and audio
+        isTalking = false;
+        bobbyAnimator.Play("BobbyIdle");
+        if (bobbyAudioSource != null && bobbyAudioSource.isPlaying)
+        {
+            bobbyAudioSource.Stop(); // Stop the looping audio
+        }
 
         textRunning = false; // Mark text as finished
     }
@@ -198,7 +218,7 @@ public class Scene01Events : MonoBehaviour
         yield return new WaitForSeconds(2);
 
    
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(2);
     }
 
     public void NextButton()
