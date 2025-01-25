@@ -57,10 +57,9 @@ public class CardHandler : MonoBehaviour
             int value = card.CardValue;
 
             // Handle Ace: count as 11 initially, but reduce to 1 if the hand is over 21.
-            if (value == 1)
+            if (value == 11)
             {
                 aceCount++;
-                value = 11; // Default value for Ace.
             }
 
             totalValue += value;
@@ -105,6 +104,12 @@ public class CardHandler : MonoBehaviour
     {
         // Dealer's turn logic: must hit until reaching playerHand or higher.
         while (CalculateHandValue(dealerHand) < CalculateHandValue(playerHand))
+        {
+            DealCard(dealerHand);
+            DisplayHands();
+        }
+
+        if (CalculateHandValue(dealerHand) == CalculateHandValue(playerHand) && CalculateHandValue(dealerHand) < 17)
         {
             DealCard(dealerHand);
             DisplayHands();

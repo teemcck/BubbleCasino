@@ -10,7 +10,7 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private Transform dealerCardsParent; // Parent for dealer cards.
     [SerializeField] private GameObject hitAndStandButtons; // Reference to hit and stand buttons.
 
-    public bool playerWantsToHit = false;
+    public bool playerHitting = false;
     private bool playerMadeChoice = true;
 
     public void UpdateUI()
@@ -75,13 +75,13 @@ public class UIHandler : MonoBehaviour
 
     public void OnHitButtonClicked()
     {
-        playerWantsToHit = true;
+        playerHitting = true;
         playerMadeChoice = true;
     }
 
     public void OnStandButtonClicked()
     {
-        playerWantsToHit = false;
+        playerHitting = false;
         playerMadeChoice = true;
     }
 }

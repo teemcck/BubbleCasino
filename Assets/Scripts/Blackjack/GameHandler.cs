@@ -26,7 +26,7 @@ public class GameHandler : MonoBehaviour
             yield return StartCoroutine(uiHandler.PlayerWantsToHit());
 
             // Now we check the player’s decision after they’ve confirmed it
-            if (uiHandler.playerWantsToHit)
+            if (uiHandler.playerHitting)
             {
                 // Player chooses to "Hit."
                 cardHandler.PlayerHit(out gameConcluded);
