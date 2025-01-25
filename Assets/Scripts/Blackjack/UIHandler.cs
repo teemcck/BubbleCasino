@@ -1,11 +1,15 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
 {
-    [SerializeField] private Canvas canvas;
-    [SerializeField] private CardHandler cardHandler;
+    [SerializeField] private Canvas canvas; // Reference to GameCanvas
+    [SerializeField] private CardHandler cardHandler; // Reference to CardHandler.
+    [SerializeField] private GameObject hitAndStandButtons; // Reference to hit and stand buttons.
+    private bool playerWantsToHit = true;
+    private bool playerMadeChoice = true;
 
     public void UpdatePlayerUI()
     {
@@ -72,5 +76,42 @@ public class UIHandler : MonoBehaviour
     {
         string spritePath = "CardSprites/" + cardID;  // Build the path to the sprite file (e.g., "CardSprites/1").
         return Resources.Load<Sprite>(spritePath);    // Load the sprite dynamically from Resources.
+    }
+
+    public bool PlayerWantsToHit()
+    {
+        bool playerWantsToHit = false;
+
+        // Enable buttons for player input.
+        hitAndStandButtons.gameObject.SetActive(true);
+
+        // Wait for player choice.
+        StartCoroutine(WaitForPlayerChoice());        // Disable buttons after the turn
+        hitAndStandButtons.gameObject.SetActive(false);
+
+        return playerWantsToHit;
+    }
+
+    private IEnumerator WaitForPlayerChoice()
+    {
+        playerMadeChoice = false;
+
+        // Wait until the player makes a choice
+        while (!playerMadeChoice)
+        {
+            yield return null; // Wait for the next frame
+        }
+    }
+
+    public void OnHitButtonClicked()
+    {
+        playerWantsToHit = true;
+        playerMadeChoice = true;
+    }
+
+    public void OnStandButtonClicked()
+    {
+        playerWantsToHit = false;
+        playerMadeChoice = true;
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 public class CardHandler : MonoBehaviour
 {
     [SerializeField] private DeckObject deck; // Reference to DeckObject.
+    [SerializeField] private UIHandler uiHandler; // Reference to UIHandler.
     private List<CardObject> playerHand = new List<CardObject>();
     private List<CardObject> dealerHand = new List<CardObject>();
 
@@ -36,7 +37,11 @@ public class CardHandler : MonoBehaviour
         if (card != null)
         {
             hand.Add(card);
-            Debug.Log($"Dealt {card.ToString()}");
+
+            // Rerender cards after some player has drawn.
+            uiHandler.UpdatePlayerUI();
+            uiHandler.UpdateDealerUI();
+
         }
         else
         {
@@ -79,7 +84,7 @@ public class CardHandler : MonoBehaviour
         Debug.Log($"Dealer's Total: {CalculateHandValue(dealerHand)}");
     }
 
-    public void PlayerTurn(out bool gameConcluded)
+    public void PlayerHit(out bool gameConcluded)
     {
         // Example of player choosing to "Hit."
         DealCard(playerHand);
@@ -110,7 +115,7 @@ public class CardHandler : MonoBehaviour
         gameConcluded = false;
     }
 
-    private void DetermineWinner()
+    public void DetermineWinner()
     {
         int playerScore = CalculateHandValue(playerHand);
         int dealerScore = CalculateHandValue(dealerHand);
