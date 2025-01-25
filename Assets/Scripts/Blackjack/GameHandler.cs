@@ -11,13 +11,25 @@ public class GameHandler : MonoBehaviour
 
         while (!gameConcluded) 
         {
+            // Player plays until stay or busts.
+            // If bust:
+            //      game ends.
+            // If stay:
+            //      If Dealer hand is <= player hand:
+            //         Dealer hits.
+            //         If bust:
+            //         game ends
+            //      Else:
+            //         Dealer stays.
+            // Decide winner.
+
             gameConcluded = true;
         }
     }
 
     private void playTurn()
     {
-        cardHandler.PlayerTurn();
-        cardHandler.DealerTurn();
+        cardHandler.PlayerTurn(out gameConcluded);
+        cardHandler.DealerTurn(out gameConcluded);
     }
 }
