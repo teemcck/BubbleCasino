@@ -15,6 +15,9 @@ public class Scene01Events : MonoBehaviour
     [SerializeField] GameObject mainTextObject;
     [SerializeField] GameObject charName;
 
+    [SerializeField] GameObject bobbyRed;
+    private Animator bobbyAnimator;
+
 
     //Next Button
     [SerializeField] GameObject nextButton;
@@ -57,6 +60,9 @@ public class Scene01Events : MonoBehaviour
         skipText = false;
         textRunning = true;
 
+        // Start talking animation
+        bobbyAnimator.SetTrigger("Talk");
+
         // Clear text and start animation
         textBox.GetComponent<TMPro.TMP_Text>().text = "";
         for (int i = 0; i < textToSpeak.Length; i++)
@@ -76,11 +82,15 @@ public class Scene01Events : MonoBehaviour
         // Ensure the full text is displayed if skipping happens
         textBox.GetComponent<TMPro.TMP_Text>().text = textToSpeak;
 
+        // Stop talking animation and switch back to idle
+        bobbyAnimator.SetTrigger("Idle");
+
         textRunning = false; // Mark text as finished
     }
 
     void Start()
     {
+        bobbyAnimator = bobbyRed.GetComponent<Animator>();
         StartCoroutine(EventStart());
     }
 
