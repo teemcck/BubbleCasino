@@ -41,7 +41,6 @@ public class GameSelectionEvents : MonoBehaviour
         {
             StartCoroutine(Roulette01());
         }
-
     }
    
 
@@ -179,7 +178,7 @@ public class GameSelectionEvents : MonoBehaviour
         nextButton.SetActive(false);
         textBox.SetActive(true);
 
-        textToSpeak = "Yeah, thanks to some bozo he decided to destroy all of our machines because he bet all of his 401K in slots.";
+        textToSpeak = "Yeah, thanks to some bozo he decided to destroy all of our machines because he blew away his 401K.";
         currentTextLength = textToSpeak.Length;
 
         yield return StartCoroutine(DisplayText("Talk"));
