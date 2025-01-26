@@ -10,6 +10,9 @@ public class CardHandler : MonoBehaviour
     public List<CardObject> dealerHand = new List<CardObject>();
     public bool gameConcluded = false;
 
+    // Sound effects
+    [SerializeField] private AudioSource cardSound;
+
     private const int BLACKJACK = 21; // Maximum score in Blackjack.
 
     // Accessor methods for player and deal hands.
@@ -54,6 +57,16 @@ public class CardHandler : MonoBehaviour
 
     private void DealCard(List<CardObject> hand)
     {
+        // Play the card sound.
+        if (cardSound != null)
+        {
+            cardSound.Play();
+        }
+        else
+        {
+            Debug.LogWarning("Card sound is not assigned!");
+        }
+
         // Get the top card from the deck.
         CardObject card = deck.DrawTopCard();
         if (card != null)

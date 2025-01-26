@@ -159,7 +159,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      WeddingMom_0: 5627724285610753191
+      WeddingMom_1: 2870435773593970483
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
