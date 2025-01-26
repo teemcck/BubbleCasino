@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: d00e71af065264f348e9438d9a946aa7
+guid: b4a0428d63653f749b43e66d8bc05af5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1026188317332939495
-    second: sr27d223ace76aws3_0
+      213: 4492536479493996151
+    second: FamilyPhoto_0
+  - first:
+      213: 5956640300590473821
+    second: FamilyPhoto_1
+  - first:
+      213: -6154856930879256429
+    second: FamilyPhoto_2
+  - first:
+      213: -7268877379368282073
+    second: FamilyPhoto_3
+  - first:
+      213: -104112109447497685
+    second: FamilyPhoto_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +49,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -46,7 +58,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -72,7 +84,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 8192
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -98,7 +110,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: WebGL
-    maxTextureSize: 8192
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -113,13 +125,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sr27d223ace76aws3_0
+      name: FamilyPhoto_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 2048
-        height: 1152
+        y: 238
+        width: 1044
+        height: 1091
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +140,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7e2294f66d0cd3e00800000000000000
-      internalID: 1026188317332939495
+      spriteID: 77e39b82022b85e30800000000000000
+      internalID: 4492536479493996151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FamilyPhoto_1
+      rect:
+        serializedVersion: 2
+        x: 1214
+        y: 198
+        width: 1249
+        height: 1288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d52a8733bcc3aa250800000000000000
+      internalID: 5956640300590473821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FamilyPhoto_2
+      rect:
+        serializedVersion: 2
+        x: 2594
+        y: 198
+        width: 841
+        height: 1351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 398479f2b3e859aa0800000000000000
+      internalID: -6154856930879256429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FamilyPhoto_3
+      rect:
+        serializedVersion: 2
+        x: 3692
+        y: 198
+        width: 1037
+        height: 1264
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72891ee1982cf1b90800000000000000
+      internalID: -7268877379368282073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FamilyPhoto_4
+      rect:
+        serializedVersion: 2
+        x: 4061
+        y: 81
+        width: 3215
+        height: 3843
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b28b09b869e1e8ef0800000000000000
+      internalID: -104112109447497685
       vertices: []
       indices: 
       edges: []
@@ -138,7 +238,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -147,8 +247,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      sr27d223ace76aws3_0: 1026188317332939495
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
