@@ -23,6 +23,8 @@ public class BlackjackEvents : MonoBehaviour
     public Animator fryAnimator;
     public AudioSource fryAudioSource;
 
+    [SerializeField] GameObject placeBets;
+
     private bool isTalking = false;
 
 
@@ -79,6 +81,15 @@ public class BlackjackEvents : MonoBehaviour
             bobbyAudioSource.Play(); // Start the looping audio
         }
 
+        yield return new WaitForSeconds(0.5f);
+
+        // Start Fry's talking audio (looping)
+        if (fryAudioSource != null && !fryAudioSource.isPlaying)
+        {
+            fryAudioSource.loop = true; // Ensure the audio loops
+            fryAudioSource.Play(); // Start the looping audio
+        }
+
         // Clear text and start animation
         textBox.GetComponent<TMPro.TMP_Text>().text = "";
         for (int i = 0; i < textToSpeak.Length; i++)
@@ -107,6 +118,13 @@ public class BlackjackEvents : MonoBehaviour
         if (bobbyAudioSource != null && bobbyAudioSource.isPlaying)
         {
             bobbyAudioSource.Stop(); // Stop the looping audio
+        }
+
+        // Stop Fry's talking audio
+        isTalking = false;
+        if (fryAudioSource != null && fryAudioSource.isPlaying)
+        {
+            fryAudioSource.Stop(); // Stop the looping audio
         }
 
         textRunning = false; // Mark text as finished
@@ -142,6 +160,7 @@ public class BlackjackEvents : MonoBehaviour
     {
         textBox.SetActive(true);
         bobbyRed.SetActive(true);
+        nextButton.SetActive(false);
 
         charName.GetComponent<TMPro.TMP_Text>().text = "Bobby Red";
 
@@ -161,6 +180,7 @@ public class BlackjackEvents : MonoBehaviour
     {
         textBox.SetActive(true);
         bobbyRed.SetActive(true);
+        nextButton.SetActive(false);
 
         charName.GetComponent<TMPro.TMP_Text>().text = "Bobby Red";
 
@@ -180,6 +200,7 @@ public class BlackjackEvents : MonoBehaviour
     {
         textBox.SetActive(true);
         bobbyRed.SetActive(true);
+        nextButton.SetActive(false);
 
         charName.GetComponent<TMPro.TMP_Text>().text = "Bobby Red";
 
@@ -199,6 +220,7 @@ public class BlackjackEvents : MonoBehaviour
     {
         textBox.SetActive(true);
         bobbyRed.SetActive(true);
+        nextButton.SetActive(false);
 
         charName.GetComponent<TMPro.TMP_Text>().text = "Bobby Red";
 
@@ -219,6 +241,7 @@ public class BlackjackEvents : MonoBehaviour
     {
         textBox.SetActive(true);
         bobbyRed.SetActive(true);
+        nextButton.SetActive(false);
 
         charName.GetComponent<TMPro.TMP_Text>().text = "Bobby Red";
 
@@ -237,8 +260,15 @@ public class BlackjackEvents : MonoBehaviour
     IEnumerator Event07()
     {
         textBox.SetActive(true);
-        bobbyRed.SetActive(true);
+        nextButton.SetActive(false);
+        
 
+        charName.GetComponent<TMPro.TMP_Text>().text = "Bobby Red";
+
+        bobbyRed.SetActive(false);
+
+        fryGuy.SetActive(true);
+        
         charName.GetComponent<TMPro.TMP_Text>().text = "Fry";
 
         // Text here
@@ -256,7 +286,8 @@ public class BlackjackEvents : MonoBehaviour
     IEnumerator Event08()
     {
         textBox.SetActive(true);
-        bobbyRed.SetActive(true);
+        nextButton.SetActive(false);
+        
 
         charName.GetComponent<TMPro.TMP_Text>().text = "Fry";
 
@@ -277,8 +308,11 @@ public class BlackjackEvents : MonoBehaviour
         textBox.SetActive(false);
         mainTextObject.SetActive(false);
         nextButton.SetActive(false);
+        
 
         yield return new WaitForSeconds(0.05f);
+
+        placeBets.SetActive(true);
         
         eventPos = 9;
     }
