@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/GameplayScene.unity
     guid: 059fc5a46b6a05c4f9460e0b9a8feb4d
   - enabled: 1
+    path: Assets/Scenes/Cutscene/WinningCutscene.unity
+    guid: cb24063f7aae640ac8fdc5553db65b00
+  - enabled: 1
     path: Assets/Scenes/WeddingScene.unity
     guid: 51f7916fa5e953f4eadabb699bb9614e
   - enabled: 0

@@ -413,7 +413,7 @@ IEnumerator DisplayText(GameObject character, Animator animator, AudioSource aud
 
         wendaAnimator.SetTrigger("LooksAtYou");
 
-        textToSpeak = "Here are you kids, ma'am.";
+        textToSpeak = "Here are your kids, ma'am.";
         currentTextLength = textToSpeak.Length;
 
         yield return StartCoroutine(DisplayText(wendaWhale, wendaAnimator, wendaAudioSource));
@@ -492,7 +492,7 @@ IEnumerator DisplayText(GameObject character, Animator animator, AudioSource aud
         yield return new WaitForSeconds(2);
 
    
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(5);
     }
 
     public void NextButton()
