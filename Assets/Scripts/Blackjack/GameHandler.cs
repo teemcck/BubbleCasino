@@ -9,6 +9,8 @@ public class GameHandler : MonoBehaviour
     [SerializeField] private BlackjackEvents eventHandler; // Reference to BlackjackEvents
     private int playerCash = 1600; // Player starts with $1600.
     private int dailyThreshold = 3200; // Starting threshold is $3200.
+    [SerializeField] private int FailureSceneIndex;
+    [SerializeField] private int SuccessSceneIndex;
 
     private int currentBet = 0; // Player's bet for the current round.
 
@@ -32,13 +34,23 @@ public class GameHandler : MonoBehaviour
         int day = 1;
 
         // Continue playing as long as player has cash and hasn't met the daily threshold
-        while (playerCash > 0)
+        while (playerCash > 0 && day <= 3)
         {
             if (playerCash >= dailyThreshold) // If the player reaches the daily threshold, move to the next day
             {
+                if (day == 3)
+                {
+                    // Day three is complete; transition to success scene.
+                    uiHandler.ShowVictory($"Congratulations! You successfully completed day {day}!");
+                    yield return new WaitForSeconds(2f);
+                    SceneManager.LoadScene(SuccessSceneIndex); // Transition to success scene.
+                    yield break; // End the coroutine.
+                }
+
                 day++; // Increment day
                 dailyThreshold *= 2; // Double the threshold
                 playerCash = Mathf.Max(playerCash, 1600); // Ensure player has at least starting cash for the next day
+                yield return StartCoroutine(uiHandler.HandleDayNightTransition()); // Transition to night.
             }
 
             // Show the current day's status
@@ -87,11 +99,7 @@ public class GameHandler : MonoBehaviour
         {
             uiHandler.ShowGameOver("You ran out of money! Game over.");
             yield return new WaitForSeconds(1f);
-            SceneManager.LoadScene(0); // Go back to scene 0 (main menu)
-        }
-        else if (playerCash >= dailyThreshold)
-        {
-            uiHandler.ShowVictory($"Congratulations! You reached the daily threshold of ${dailyThreshold}!");
+            SceneManager.LoadScene(FailureSceneIndex); // Go to failure scene.
         }
     }
 
@@ -100,9 +108,7 @@ public class GameHandler : MonoBehaviour
         // Deal out cards
         yield return StartCoroutine(cardHandler.StartGame());
 
-        // Player's turn
-        bool gameConcluded = false;
-        while (!gameConcluded)
+        while (!cardHandler.gameConcluded)
         {
             // Wait for the player to make a decision
             yield return StartCoroutine(uiHandler.PlayerWantsToHit());
@@ -111,7 +117,7 @@ public class GameHandler : MonoBehaviour
             if (uiHandler.playerHitting)
             {
                 // Player chooses to "Hit."
-                cardHandler.PlayerHit(out gameConcluded);
+                cardHandler.PlayerHit();
             }
             else
             {
@@ -121,9 +127,10 @@ public class GameHandler : MonoBehaviour
         }
 
         // Dealer's turn
-        if (!gameConcluded)
+        if (!cardHandler.gameConcluded)
         {
-            cardHandler.DealerTurn(out gameConcluded);
+            yield return new WaitForSeconds(.5f);
+            cardHandler.DealerTurn();
         }
     }
 }
