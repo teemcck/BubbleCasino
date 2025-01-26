@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,20 +15,27 @@ public class CardHandler : MonoBehaviour
     public List<CardObject> GetPlayerHand() => playerHand;
     public List<CardObject> GetDealerHand() => dealerHand;
 
-    public void StartGame()
+    public IEnumerator StartGame()
     {
         // Initialize the deck.
         deck.InitializeDeck();
 
-        // Deal two cards to the player.
-        DealCard(playerHand);
-        DealCard(playerHand);
+        // Initially wait before dealing.
+        yield return new WaitForSeconds(0.6f);
 
-        // Deal to cards to the dealer.
-        DealCard(dealerHand);
-        DealCard(dealerHand);
-
+        // Deal two cards to the player with a delay.
+        DealCard(playerHand);
         DisplayHands();
+        yield return new WaitForSeconds(0.4f);
+
+        DealCard(playerHand);
+        DisplayHands();
+        yield return new WaitForSeconds(0.4f);
+
+        // Deal one card to the dealer with a delay.
+        DealCard(dealerHand);
+        DisplayHands();
+        yield return new WaitForSeconds(0.4f);
     }
 
     private void DealCard(List<CardObject> hand)
@@ -127,7 +135,7 @@ public class CardHandler : MonoBehaviour
         }
     }
 
-    public void DetermineWinner()
+    public int DetermineWinner()
     {
         int playerScore = CalculateHandValue(playerHand);
         int dealerScore = CalculateHandValue(dealerHand);
@@ -135,14 +143,17 @@ public class CardHandler : MonoBehaviour
         if (playerScore > dealerScore)
         {
             Debug.Log("Player Wins!");
+            return 1;
         }
         else if (playerScore < dealerScore)
         {
             Debug.Log("Dealer Wins!");
+            return -1;
         }
         else
         {
             Debug.Log("It's a Tie!");
+            return 0;
         }
     }
 }
