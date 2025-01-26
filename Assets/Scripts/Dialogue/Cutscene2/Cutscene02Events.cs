@@ -432,7 +432,7 @@ IEnumerator DisplayText(GameObject character, Animator animator, AudioSource aud
 
         charName.GetComponent<TMPro.TMP_Text>().text = "Wenda";
 
-        textToSpeak = "These little shits have been meddling wth just about everything. I can't even turn my back for one second, and one would just be playing with the vodka botttles.";
+        textToSpeak = "These little shits have been meddling with just about everything! I can't even turn my back for one second without one of them playing with the vodka bottles.";
         currentTextLength = textToSpeak.Length;
 
         yield return StartCoroutine(DisplayText(wendaWhale, wendaAnimator, wendaAudioSource));
