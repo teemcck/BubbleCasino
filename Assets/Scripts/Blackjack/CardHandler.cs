@@ -38,6 +38,19 @@ public class CardHandler : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
     }
 
+    public void ResetGame()
+    {
+        // Clear player and dealer hands.
+        playerHand.Clear();
+        dealerHand.Clear();
+
+        // Reinitialize the deck to ensure it’s full.
+        deck.InitializeDeck();
+
+        // Update the UI to reflect the cleared hands.
+        uiHandler.UpdateUI();
+    }
+
     private void DealCard(List<CardObject> hand)
     {
         // Get the top card from the deck.
@@ -140,20 +153,18 @@ public class CardHandler : MonoBehaviour
         int playerScore = CalculateHandValue(playerHand);
         int dealerScore = CalculateHandValue(dealerHand);
 
+        // Handle bust scenarios
+        if (playerScore > 21)
+            return -1; // Dealer wins if the player busts.
+        if (dealerScore > 21)
+            return 1; // Player wins if the dealer busts.
+
+        // Compare scores
         if (playerScore > dealerScore)
-        {
-            Debug.Log("Player Wins!");
-            return 1;
-        }
-        else if (playerScore < dealerScore)
-        {
-            Debug.Log("Dealer Wins!");
-            return -1;
-        }
-        else
-        {
-            Debug.Log("It's a Tie!");
-            return 0;
-        }
+            return 1; // Player wins with a higher score.
+        if (dealerScore > playerScore)
+            return -1; // Dealer wins with a higher score.
+
+        return 0; // It's a tie.
     }
 }

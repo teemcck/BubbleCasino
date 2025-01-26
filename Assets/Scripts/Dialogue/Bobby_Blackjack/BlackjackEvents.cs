@@ -16,21 +16,26 @@ public class BlackjackEvents : MonoBehaviour
     [SerializeField] GameObject charName;
 
     [SerializeField] GameObject bobbyRed;
+    [SerializeField] GameObject bobbyRedLeaves;
     public Animator bobbyAnimator;
     public AudioSource bobbyAudioSource;
 
     [SerializeField] GameObject fryGuy;
+    [SerializeField] GameObject fryToken;
     public Animator fryAnimator;
     public AudioSource fryAudioSource;
 
+    [SerializeField] GameObject placeBets;
+
     private bool isTalking = false;
-
-
+    public bool dialogFinished = false;
 
     //Next Button
     [SerializeField] GameObject nextButton;
     [SerializeField] int eventPos = 0;
     [SerializeField] GameObject fadeScreenOut;
+
+    [SerializeField] GameObject quitConfirmationBox;
 
     //Skip Feature
     private bool skipText = false;
@@ -79,6 +84,13 @@ public class BlackjackEvents : MonoBehaviour
             bobbyAudioSource.Play(); // Start the looping audio
         }
 
+        // Start Fry's talking audio (looping)
+        if (fryAudioSource != null && !fryAudioSource.isPlaying)
+        {
+            fryAudioSource.loop = true; // Ensure the audio loops
+            fryAudioSource.Play(); // Start the looping audio
+        }
+
         // Clear text and start animation
         textBox.GetComponent<TMPro.TMP_Text>().text = "";
         for (int i = 0; i < textToSpeak.Length; i++)
@@ -109,32 +121,46 @@ public class BlackjackEvents : MonoBehaviour
             bobbyAudioSource.Stop(); // Stop the looping audio
         }
 
+        // Stop Fry's talking audio
+        isTalking = false;
+        if (fryAudioSource != null && fryAudioSource.isPlaying)
+        {
+            fryAudioSource.Stop(); // Stop the looping audio
+        }
+
         textRunning = false; // Mark text as finished
     }
 
     void Start()
     {
         bobbyAnimator = bobbyRed.GetComponent<Animator>();
-        StartCoroutine(EventStart());
     }
 
-
-    IEnumerator EventStart()
+    public IEnumerator EventStart()
     {
+        // Ensure this flag is reset
+        dialogFinished = false;
+
+        // Activate text box and character
         textBox.SetActive(true);
         bobbyRed.SetActive(true);
 
+        // Set the character's name
         charName.GetComponent<TMPro.TMP_Text>().text = "Bobby Red";
 
-        // Text here
+        // Set the text to be displayed
         mainTextObject.SetActive(true);
         textToSpeak = "Ah, good ol' blackjack!";
         currentTextLength = textToSpeak.Length;
 
+        // Wait for the dialog coroutine to complete
         yield return StartCoroutine(DisplayText());
+
+        // Wait a moment before enabling the next button
         yield return new WaitForSeconds(0.05f);
         nextButton.SetActive(true);
-        
+
+        // Update event position
         eventPos = 1;
     }
 
@@ -142,12 +168,13 @@ public class BlackjackEvents : MonoBehaviour
     {
         textBox.SetActive(true);
         bobbyRed.SetActive(true);
+        nextButton.SetActive(false);
 
         charName.GetComponent<TMPro.TMP_Text>().text = "Bobby Red";
 
         // Text here
         mainTextObject.SetActive(true);
-        textToSpeak = "Y'know I once played blackjack with a hunky lookin' shark. The one you're probably marrying soon.";
+        textToSpeak = "Y'know I once played blackjack with a hunky lookin' shark.";
         currentTextLength = textToSpeak.Length;
 
         yield return StartCoroutine(DisplayText());
@@ -161,6 +188,7 @@ public class BlackjackEvents : MonoBehaviour
     {
         textBox.SetActive(true);
         bobbyRed.SetActive(true);
+        nextButton.SetActive(false);
 
         charName.GetComponent<TMPro.TMP_Text>().text = "Bobby Red";
 
@@ -180,6 +208,7 @@ public class BlackjackEvents : MonoBehaviour
     {
         textBox.SetActive(true);
         bobbyRed.SetActive(true);
+        nextButton.SetActive(false);
 
         charName.GetComponent<TMPro.TMP_Text>().text = "Bobby Red";
 
@@ -199,12 +228,13 @@ public class BlackjackEvents : MonoBehaviour
     {
         textBox.SetActive(true);
         bobbyRed.SetActive(true);
+        nextButton.SetActive(false);
 
         charName.GetComponent<TMPro.TMP_Text>().text = "Bobby Red";
 
         // Text here
         mainTextObject.SetActive(true);
-        textToSpeak = "Here. I'll leave it to my pal, Fry. He'll be your server";
+        textToSpeak = "Here. I'll leave it to my pal, Fry. He'll be your server.";
         currentTextLength = textToSpeak.Length;
 
         yield return StartCoroutine(DisplayText());
@@ -219,6 +249,7 @@ public class BlackjackEvents : MonoBehaviour
     {
         textBox.SetActive(true);
         bobbyRed.SetActive(true);
+        nextButton.SetActive(false);
 
         charName.GetComponent<TMPro.TMP_Text>().text = "Bobby Red";
 
@@ -237,13 +268,21 @@ public class BlackjackEvents : MonoBehaviour
     IEnumerator Event07()
     {
         textBox.SetActive(true);
-        bobbyRed.SetActive(true);
+        nextButton.SetActive(false);
+        
 
+        charName.GetComponent<TMPro.TMP_Text>().text = "Bobby Red";
+
+        bobbyRed.SetActive(false);
+        bobbyRedLeaves.SetActive(true);
+
+        fryGuy.SetActive(true);
+        
         charName.GetComponent<TMPro.TMP_Text>().text = "Fry";
 
         // Text here
         mainTextObject.SetActive(true);
-        textToSpeak = "Greeting, Mademoiselle.";
+        textToSpeak = "Greetings, Mademoiselle.";
         currentTextLength = textToSpeak.Length;
 
         yield return StartCoroutine(DisplayText());
@@ -256,7 +295,9 @@ public class BlackjackEvents : MonoBehaviour
     IEnumerator Event08()
     {
         textBox.SetActive(true);
-        bobbyRed.SetActive(true);
+        nextButton.SetActive(false);
+        bobbyRedLeaves.SetActive(false);
+        
 
         charName.GetComponent<TMPro.TMP_Text>().text = "Fry";
 
@@ -277,10 +318,18 @@ public class BlackjackEvents : MonoBehaviour
         textBox.SetActive(false);
         mainTextObject.SetActive(false);
         nextButton.SetActive(false);
+        
 
         yield return new WaitForSeconds(0.05f);
+
+        placeBets.SetActive(true);
         
         eventPos = 9;
+
+        // Signal completion
+        dialogFinished = true;
+        fryGuy.SetActive(false);
+        fryToken.SetActive(true);
     }
 
 
@@ -323,4 +372,18 @@ public class BlackjackEvents : MonoBehaviour
             StartCoroutine(Event09());
         }
     }
+
+     public void QuitBlackJackGame()
+    {   
+        StartCoroutine(QuitBlackjack()); 
+    }
+
+    IEnumerator QuitBlackjack()
+    {   
+        quitConfirmationBox.SetActive(false);
+        fadeScreenOut.SetActive(true);
+
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(2);
+    } 
 }
