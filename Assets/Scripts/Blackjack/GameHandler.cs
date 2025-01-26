@@ -5,6 +5,7 @@ public class GameHandler : MonoBehaviour
 {
     [SerializeField] private CardHandler cardHandler; // Reference to CardHandler.
     [SerializeField] private UIHandler uiHandler; // Reference to UIHandler.
+    [SerializeField] private BlackjackEvents eventHandler; // Reference to BlackjackEvents
     [SerializeField] private int playerCash = 100; // Define starting cash.
     [SerializeField] private int dailyThreshold = 200; // Initial threshold.
     [SerializeField] private int thresholdIncrement = 50; // Threshold increment per day.
@@ -14,9 +15,13 @@ public class GameHandler : MonoBehaviour
 
     public bool PlayerWantsToHit => playerWantsToHit;
 
-    private void Start()
+    private IEnumerator Start()
     {
-        StartCoroutine(PlayBlackjack());
+        // Run the first coroutine and wait until it completes
+        yield return StartCoroutine(eventHandler.EventStart());
+
+        // Once the first coroutine finishes, start the second coroutine
+        yield return StartCoroutine(PlayBlackjack());
     }
 
     private IEnumerator PlayBlackjack()

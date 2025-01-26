@@ -27,8 +27,6 @@ public class BlackjackEvents : MonoBehaviour
 
     private bool isTalking = false;
 
-
-
     //Next Button
     [SerializeField] GameObject nextButton;
     [SerializeField] int eventPos = 0;
@@ -133,11 +131,9 @@ public class BlackjackEvents : MonoBehaviour
     void Start()
     {
         bobbyAnimator = bobbyRed.GetComponent<Animator>();
-        StartCoroutine(EventStart());
     }
 
-
-    IEnumerator EventStart()
+    public IEnumerator EventStart()
     {
         textBox.SetActive(true);
         bobbyRed.SetActive(true);

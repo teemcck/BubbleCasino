@@ -15,7 +15,10 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private TMP_InputField betInputField; // TMP input field for player's bet.
     [SerializeField] private GameObject betPanel; // Panel for placing bets.
     [SerializeField] private GameObject continuePanel; // Panel for asking to continue.
-    [SerializeField] private TMP_Text resultText; // TMP text to show round results.
+
+    // References for the win/loss images.
+    [SerializeField] private GameObject youWinImage;  // "You Win" image.
+    [SerializeField] private GameObject youLoseImage; // "You Lose" image.
 
     public bool playerHitting = false;
     private bool playerMadeChoice = true;
@@ -33,7 +36,7 @@ public class UIHandler : MonoBehaviour
         Vector3 playerStartPosition = new Vector3(-300, 0, 0);
         RenderCards(playerHand, playerCardsParent, playerStartPosition);
 
-        // Update Dealer UI.
+        // Update Dealer UI
         List<CardObject> dealerHand = cardHandler.GetDealerHand();
         Vector3 dealerStartPosition = new Vector3(-300, 300, 0);
         RenderCards(dealerHand, dealerCardsParent, dealerStartPosition);
@@ -128,14 +131,32 @@ public class UIHandler : MonoBehaviour
 
     public void ShowInvalidBetMessage()
     {
-        resultText.text = "Invalid bet! Try again.";
-        resultText.gameObject.SetActive(true);
+        // Show a message about the invalid bet.
+        dayStatusText.text = "Invalid bet! Try again.";
     }
 
-    public void ShowRoundResult(string message, int reward)
+    public void ShowRoundResult(string result, int reward)
     {
-        resultText.text = $"{message}\nYou earned: ${reward}";
-        resultText.gameObject.SetActive(true);
+        // Hide both win/loss images by default.
+        youWinImage.SetActive(false);
+        youLoseImage.SetActive(false);
+
+        // Show appropriate result image.
+        if (result == "Win")
+        {
+            youWinImage.SetActive(true); // Show the "You Win" image.
+        }
+        else if (result == "Lose")
+        {
+            youLoseImage.SetActive(true); // Show the "You Lose" image.
+        }
+        else
+        {
+            // If there's no win/lose, you can handle that case, e.g., draw, push, etc.
+        }
+
+        // Optionally show text about rewards.
+        dayStatusText.text = $"{result}\nYou earned: ${reward}";
     }
 
     public IEnumerator AskPlayerToContinue()
