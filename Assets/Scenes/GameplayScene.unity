@@ -3149,7 +3149,7 @@ MonoBehaviour:
   uiHandler: {fileID: 133033684}
   eventHandler: {fileID: 1021292093}
   FailureSceneIndex: 6
-  SuccessSceneIndex: 5
+  SuccessSceneIndex: 4
   moneySound: {fileID: 912837163}
   loseRoundSound: {fileID: 136621860}
 --- !u!4 &1240507171
