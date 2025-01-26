@@ -256,6 +256,37 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &328525089
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 328525090}
+  m_Layer: 0
+  m_Name: Sounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &328525090
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328525089}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 881.5831, y: 595.00116, z: -2.1902843}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &400838481
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,7 +757,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeScreenIn: {fileID: 1077494848}
   fadeScreenOut: {fileID: 1959387628}
-  initialSong: {fileID: 0}
+  initialSong: {fileID: 8300000, guid: 89781e00c6e1b4c4fa65fc40ddd9b153, type: 3}
   returnToMenu: {fileID: 1946723129}
   eventPos: 0
   audioSource: {fileID: 1175751780}
@@ -1140,3 +1171,4 @@ SceneRoots:
   - {fileID: 274980660}
   - {fileID: 400838485}
   - {fileID: 692508264}
+  - {fileID: 328525090}
