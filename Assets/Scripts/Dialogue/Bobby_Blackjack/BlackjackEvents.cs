@@ -16,6 +16,7 @@ public class BlackjackEvents : MonoBehaviour
     [SerializeField] GameObject charName;
 
     [SerializeField] GameObject bobbyRed;
+    [SerializeField] GameObject bobbyRedLeaves;
     public Animator bobbyAnimator;
     public AudioSource bobbyAudioSource;
 
@@ -33,6 +34,8 @@ public class BlackjackEvents : MonoBehaviour
     [SerializeField] GameObject nextButton;
     [SerializeField] int eventPos = 0;
     [SerializeField] GameObject fadeScreenOut;
+
+    [SerializeField] GameObject quitConfirmationBox;
 
     //Skip Feature
     private bool skipText = false;
@@ -80,8 +83,6 @@ public class BlackjackEvents : MonoBehaviour
         {
             bobbyAudioSource.Play(); // Start the looping audio
         }
-
-        yield return new WaitForSeconds(0.5f);
 
         // Start Fry's talking audio (looping)
         if (fryAudioSource != null && !fryAudioSource.isPlaying)
@@ -173,7 +174,7 @@ public class BlackjackEvents : MonoBehaviour
 
         // Text here
         mainTextObject.SetActive(true);
-        textToSpeak = "Y'know I once played blackjack with a hunky lookin' shark. The one you're probably marrying soon.";
+        textToSpeak = "Y'know I once played blackjack with a hunky lookin' shark.";
         currentTextLength = textToSpeak.Length;
 
         yield return StartCoroutine(DisplayText());
@@ -233,7 +234,7 @@ public class BlackjackEvents : MonoBehaviour
 
         // Text here
         mainTextObject.SetActive(true);
-        textToSpeak = "Here. I'll leave it to my pal, Fry. He'll be your server";
+        textToSpeak = "Here. I'll leave it to my pal, Fry. He'll be your server.";
         currentTextLength = textToSpeak.Length;
 
         yield return StartCoroutine(DisplayText());
@@ -273,6 +274,7 @@ public class BlackjackEvents : MonoBehaviour
         charName.GetComponent<TMPro.TMP_Text>().text = "Bobby Red";
 
         bobbyRed.SetActive(false);
+        bobbyRedLeaves.SetActive(true);
 
         fryGuy.SetActive(true);
         
@@ -280,7 +282,7 @@ public class BlackjackEvents : MonoBehaviour
 
         // Text here
         mainTextObject.SetActive(true);
-        textToSpeak = "Greeting, Mademoiselle.";
+        textToSpeak = "Greetings, Mademoiselle.";
         currentTextLength = textToSpeak.Length;
 
         yield return StartCoroutine(DisplayText());
@@ -294,6 +296,7 @@ public class BlackjackEvents : MonoBehaviour
     {
         textBox.SetActive(true);
         nextButton.SetActive(false);
+        bobbyRedLeaves.SetActive(false);
         
 
         charName.GetComponent<TMPro.TMP_Text>().text = "Fry";
@@ -369,4 +372,18 @@ public class BlackjackEvents : MonoBehaviour
             StartCoroutine(Event09());
         }
     }
+
+     public void QuitBlackJackGame()
+    {   
+        StartCoroutine(QuitBlackjack()); 
+    }
+
+    IEnumerator QuitBlackjack()
+    {   
+        quitConfirmationBox.SetActive(false);
+        fadeScreenOut.SetActive(true);
+
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(2);
+    } 
 }
