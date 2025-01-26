@@ -153,7 +153,7 @@ public class Scene01Events : MonoBehaviour
         nextButton.SetActive(false);
         textBox.SetActive(true);
 
-        textToSpeak = "Drown yourself into our wide selection of games where you and your lovely children can bet on!";
+        textToSpeak = "Drown yourself into our wide selection of games where you and your lovely children can bet big!";
         currentTextLength = textToSpeak.Length;
 
         yield return StartCoroutine(DisplayText());
