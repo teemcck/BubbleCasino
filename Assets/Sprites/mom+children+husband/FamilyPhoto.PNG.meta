@@ -234,7 +234,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FamilyPhoto_0: 4492536479493996151
+      FamilyPhoto_1: 5956640300590473821
+      FamilyPhoto_2: -6154856930879256429
+      FamilyPhoto_3: -7268877379368282073
+      FamilyPhoto_4: -104112109447497685
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

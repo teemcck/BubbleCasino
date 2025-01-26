@@ -5,12 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class MenuButtons : MonoBehaviour
 {
-
     [SerializeField] AudioClip themeSong;
     [SerializeField] GameObject fadeOut;
-
-    //SoundControl
     [SerializeField] AudioSource audioSource;
+
     private IEnumerator FadeOutMusic(float fadeDuration)
 {
     float startVolume = audioSource.volume;
@@ -33,7 +31,6 @@ public class MenuButtons : MonoBehaviour
 
     }
 
-
     public void StartGame()
     {   
         StartCoroutine(StartingGame()); 
@@ -47,7 +44,6 @@ public class MenuButtons : MonoBehaviour
 
 
         SceneManager.LoadScene(1); // Loads the scene with build index 1
-        
     }
 
     public void QuitGame()
@@ -60,9 +56,14 @@ public class MenuButtons : MonoBehaviour
     {
         SceneManager.LoadScene("CreditsScene"); // Loads the scene named "CreditsScene"
     }
-    public void LoadTitleScreen()
+
+    public void LoadObjectiveScene()
     {
-        SceneManager.LoadScene("TitleScreen"); // Loads the scene named "CreditsScene"
+        SceneManager.LoadScene("ObjectiveScene"); // Loads the scene named "ObjectiveScene"
     }
 
+    public void LoadTitleScene()
+    {
+        SceneManager.LoadScene("TitleScreen"); // Loads the scene named "TitleScreen"
+    }
 }
