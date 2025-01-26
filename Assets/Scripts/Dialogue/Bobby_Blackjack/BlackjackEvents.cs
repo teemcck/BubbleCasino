@@ -22,6 +22,7 @@ public class BlackjackEvents : MonoBehaviour
 
     [SerializeField] GameObject fryGuy;
     [SerializeField] GameObject fryToken;
+    [SerializeField] GameObject mommyToken;
     public Animator fryAnimator;
     public AudioSource fryAudioSource;
 
@@ -330,8 +331,8 @@ public class BlackjackEvents : MonoBehaviour
         dialogFinished = true;
         fryGuy.SetActive(false);
         fryToken.SetActive(true);
+        mommyToken.SetActive(true);
     }
-
 
     public void NextButton()
     {

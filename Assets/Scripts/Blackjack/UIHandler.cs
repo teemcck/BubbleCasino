@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
 {
@@ -13,12 +14,14 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private TMP_Text dayStatusText; // TMP text to show day status.
     [SerializeField] private TMP_InputField betInputField; // TMP input field for player's bet.
     [SerializeField] private GameObject betPanel; // Panel for placing bets.
-    [SerializeField] private GameObject continuePanel; // Panel for asking to continue.
-    [SerializeField] private TMP_Text playerCashText; // TMP text to show player's current cash.
+    [SerializeField] private GameObject nighttimeImage; // Reference to nighttime image.
+    [SerializeField] private GameObject fadeInOut; // Reference to fade overlay image.
 
     // References for the win/loss images.
     [SerializeField] private GameObject youWinImage;  // "You Win" image.
     [SerializeField] private GameObject youLoseImage; // "You Lose" image.
+
+    [SerializeField] private float fadeDuration;
 
     public bool playerHitting = false;
     private bool playerMadeChoice = true;
@@ -139,11 +142,6 @@ public class UIHandler : MonoBehaviour
         dayStatusText.text = "Invalid bet! Enter a number less than your cash.";
     }
 
-    public void UpdatePlayerCashUI(int playerCash)
-    {
-        playerCashText.text = $"Cash: ${playerCash}";
-    }
-
     public IEnumerator ShowRoundResult(int result, int reward)
     {
         // Hide both win/loss images by default.
@@ -189,19 +187,73 @@ public class UIHandler : MonoBehaviour
     }
 
 
-    public IEnumerator AskPlayerToContinue()
+    public IEnumerator HandleDayNightTransition()
     {
-        continuePanel.SetActive(true);
-        PlayerWantsToContinue = false;
+        dayStatusText.enabled = false;
 
-        // Wait for player input to continue or exit.
-        while (!PlayerWantsToContinue)
+        // Fade to black.
+        fadeInOut.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
+        // Deactivate the nighttime image.
+        nighttimeImage.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
+        fadeInOut.SetActive(false);
+
+        yield return new WaitForSeconds(2f);
+
+        // Fade to black.
+        fadeInOut.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
+        // Deactivate the nighttime image.
+        nighttimeImage.SetActive(false);
+
+        yield return new WaitForSeconds(1f);
+
+        fadeInOut.SetActive(false);
+
+        dayStatusText.enabled = true;
+    }
+
+    private IEnumerator FadeToBlack(Image fadeOverlay, float fadeDuration)
+    {
+        Color color = fadeOverlay.color;
+        float elapsed = 0;
+
+        while (elapsed < fadeDuration)
         {
-            yield return null; // Wait for the next frame.
+            elapsed += Time.deltaTime;
+            color.a = Mathf.Clamp01(elapsed / fadeDuration);
+            fadeOverlay.color = color;
+            yield return null;
         }
 
-        continuePanel.SetActive(false);
+        color.a = 1; // Ensure fully black
+        fadeOverlay.color = color;
     }
+
+    private IEnumerator FadeFromBlack(Image fadeOverlay, float fadeDuration)
+    {
+        Color color = fadeOverlay.color;
+        float elapsed = 0;
+
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            color.a = 1 - Mathf.Clamp01(elapsed / fadeDuration);
+            fadeOverlay.color = color;
+            yield return null;
+        }
+
+        color.a = 0; // Ensure fully transparent
+        fadeOverlay.color = color;
+    }
+
 
     public void OnContinueButtonClicked()
     {

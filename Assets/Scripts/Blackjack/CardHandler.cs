@@ -8,6 +8,7 @@ public class CardHandler : MonoBehaviour
     [SerializeField] private UIHandler uiHandler; // Reference to UIHandler.
     public List<CardObject> playerHand = new List<CardObject>();
     public List<CardObject> dealerHand = new List<CardObject>();
+    public bool gameConcluded = false;
 
     private const int BLACKJACK = 21; // Maximum score in Blackjack.
 
@@ -21,21 +22,21 @@ public class CardHandler : MonoBehaviour
         deck.InitializeDeck();
 
         // Initially wait before dealing.
-        yield return new WaitForSeconds(0.6f);
+        yield return StartCoroutine(WaitSetTime(0.6f));
 
         // Deal two cards to the player with a delay.
         DealCard(playerHand);
         DisplayHands();
-        yield return new WaitForSeconds(0.4f);
+        yield return StartCoroutine(WaitSetTime(0.5f));
 
         DealCard(playerHand);
         DisplayHands();
-        yield return new WaitForSeconds(0.4f);
+        yield return StartCoroutine(WaitSetTime(0.5f));
 
         // Deal one card to the dealer with a delay.
         DealCard(dealerHand);
         DisplayHands();
-        yield return new WaitForSeconds(0.4f);
+        yield return StartCoroutine(WaitSetTime(0.5f));
     }
 
     public void ResetGame()
@@ -102,7 +103,7 @@ public class CardHandler : MonoBehaviour
         Debug.Log($"Dealer's Total: {CalculateHandValue(dealerHand)}");
     }
 
-    public void PlayerHit(out bool gameConcluded)
+    public void PlayerHit()
     {
         // Example of player choosing to "Hit."
         DealCard(playerHand);
@@ -121,31 +122,39 @@ public class CardHandler : MonoBehaviour
         }
     }
 
-    public void DealerTurn(out bool gameConcluded)
+    public IEnumerator DealerTurn()
     {
         // Dealer's turn logic: must hit until reaching playerHand or higher.
         while (CalculateHandValue(dealerHand) < CalculateHandValue(playerHand))
         {
             DealCard(dealerHand);
             DisplayHands();
+            yield return StartCoroutine(WaitSetTime(0.5f));
         }
 
         if (CalculateHandValue(dealerHand) == CalculateHandValue(playerHand) && CalculateHandValue(dealerHand) < 17)
         {
             DealCard(dealerHand);
             DisplayHands();
+            yield return StartCoroutine(WaitSetTime(0.5f));
         }
 
         // Check if the dealer busted.
         if (CalculateHandValue(dealerHand) > BLACKJACK)
         {
             Debug.Log("Dealer Busted! Player Wins!");
+            yield return StartCoroutine(WaitSetTime(0.5f));
             gameConcluded = true;
         }
         else
         {
             gameConcluded = false;
         }
+    }
+
+    private IEnumerator WaitSetTime(float time)
+    {
+        yield return new WaitForSeconds(time);
     }
 
     public int DetermineWinner()
