@@ -11,6 +11,10 @@ public class DeckObject : MonoBehaviour
 
     public void InitializeDeck()
     {
+        // Reset the number of cards drawn.
+        cardsDrawnFromDeck = 0;
+
+        // Randomize the deck to reset it.
         RandomizeDeck();
     }
 

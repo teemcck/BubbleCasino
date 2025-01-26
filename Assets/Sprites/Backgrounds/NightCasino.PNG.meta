@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      NightCasino_0: 5340607601163441657
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

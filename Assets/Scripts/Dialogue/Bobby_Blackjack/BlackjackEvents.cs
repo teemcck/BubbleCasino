@@ -20,12 +20,14 @@ public class BlackjackEvents : MonoBehaviour
     public AudioSource bobbyAudioSource;
 
     [SerializeField] GameObject fryGuy;
+    [SerializeField] GameObject fryToken;
     public Animator fryAnimator;
     public AudioSource fryAudioSource;
 
     [SerializeField] GameObject placeBets;
 
     private bool isTalking = false;
+    public bool dialogFinished = false;
 
     //Next Button
     [SerializeField] GameObject nextButton;
@@ -135,20 +137,29 @@ public class BlackjackEvents : MonoBehaviour
 
     public IEnumerator EventStart()
     {
+        // Ensure this flag is reset
+        dialogFinished = false;
+
+        // Activate text box and character
         textBox.SetActive(true);
         bobbyRed.SetActive(true);
 
+        // Set the character's name
         charName.GetComponent<TMPro.TMP_Text>().text = "Bobby Red";
 
-        // Text here
+        // Set the text to be displayed
         mainTextObject.SetActive(true);
         textToSpeak = "Ah, good ol' blackjack!";
         currentTextLength = textToSpeak.Length;
 
+        // Wait for the dialog coroutine to complete
         yield return StartCoroutine(DisplayText());
+
+        // Wait a moment before enabling the next button
         yield return new WaitForSeconds(0.05f);
         nextButton.SetActive(true);
-        
+
+        // Update event position
         eventPos = 1;
     }
 
@@ -311,6 +322,11 @@ public class BlackjackEvents : MonoBehaviour
         placeBets.SetActive(true);
         
         eventPos = 9;
+
+        // Signal completion
+        dialogFinished = true;
+        fryGuy.SetActive(false);
+        fryToken.SetActive(true);
     }
 
 
