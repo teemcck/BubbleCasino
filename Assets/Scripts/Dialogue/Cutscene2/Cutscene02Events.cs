@@ -353,7 +353,7 @@ IEnumerator DisplayText(GameObject character, Animator animator, AudioSource aud
 
         wendaAnimator.SetTrigger("Smile");
 
-        textToSpeak = "You absolutely mooly-wopped the hell out of Bobby. Those muscles aren't for show, right? Haha!";
+        textToSpeak = "You absolutely molly-wopped the hell out of Bobby. Those muscles aren't for show, right? Haha!";
         currentTextLength = textToSpeak.Length;
 
         yield return StartCoroutine(DisplayText(wendaWhale, wendaAnimator, wendaAudioSource));
